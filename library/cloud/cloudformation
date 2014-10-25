@@ -204,7 +204,7 @@ def invoke_with_throttling_retries(function_ref, *argv):
             retval=function_ref(argv)
             return retval
         except boto.exception.BotoServerError, e:
-            if e.code != IGNORE_CODE or retries==MAX_RETRIES
+            if e.code != IGNORE_CODE or retries==MAX_RETRIES:
                 raise e
         time.sleep(5 * (2**retries))
         retries += 1

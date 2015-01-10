@@ -43,6 +43,9 @@ class InventoryScript(object):
         except OSError, e:
             raise errors.AnsibleError("problem running %s (%s)" % (' '.join(cmd), e))
         (stdout, stderr) = sp.communicate()
+        rc=sp.returncode
+        if rc != 0:
+            raise errors.AnsibleError("%s\nnon-zero return code while listing dynamic inventory %s" % (stderr, ' '.join(cmd)))
         self.data = stdout
         # see comment about _meta below
         self.host_vars_from_top = None

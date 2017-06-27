@@ -775,6 +775,7 @@ def parse_yaml_from_file(path, vault_password=None):
         show_content = False
 
     try:
+        print "parsing YAML file: ", path
         return parse_yaml(data, path_hint=path)
     except yaml.YAMLError, exc:
         process_yaml_error(exc, data, path, show_content)
